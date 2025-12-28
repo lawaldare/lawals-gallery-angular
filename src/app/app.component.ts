@@ -14,33 +14,32 @@ export class AppComponent implements OnInit {
   constructor(private uploadService: UploadService) {}
 
   ngOnInit(): void {
-    // this.uploadService
-    //   .getFiles()
-    //   .snapshotChanges()
-    //   .pipe(
-    //     map((changes) => {
-    //       return changes.map((image) => ({
-    //         key: image.payload.key,
-    //         ...image.payload.val(),
-    //       }));
-    //     })
-    //   )
-    //   .subscribe((files) => {
-    //     this.files = files;
-    //   });
+    this.uploadService
+      .getFiles()
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((image) => ({
+            key: image.payload.key,
+            ...image.payload.val(),
+          }));
+        })
+      )
+      .subscribe(
+        (filesFromDB: { key: string; name: string; url: string }[]) => {
+          this.files = filesFromDB;
+        }
+      );
 
-    // setInterval(this.change.bind(this), this.numberOfSeconds);
-    setInterval(this.change, this.numberOfSeconds);
+    setInterval(this.change.bind(this), this.numberOfSeconds);
   }
 
   change() {
     let div = document.querySelector('section');
-    let num = Math.floor(Math.random() * 231) + 1;
-    // console.log(this.files[num].url);
+    let num = Math.floor(Math.random() * this.files.length) + 1;
 
     if (div) {
-      // div.innerHTML = `<img src='${this.files[num].url}'>`;
-      div.innerHTML = `<img src='assets/images/${num}.jpg'>`;
+      div.innerHTML = `<img src='${this.files[num].url}'>`;
     }
   }
 }

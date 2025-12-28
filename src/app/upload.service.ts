@@ -69,8 +69,39 @@ export class UploadService {
     return this.db.list(this.basePath).remove(key);
   }
 
-  private deleteFileStorage(name: string): void {
-    const storageRef = this.storage.ref(this.basePath);
-    storageRef.child(name).delete();
+  // public deleteFileStorage(name: string): void {
+  //   const storageRef = this.storage.ref(this.basePath);
+  //   storageRef.child(name).delete();
+  // }
+
+  // public deleteFileStorage(name: string): void {
+  //   const storageRef = this.storage.ref(this.basePath);
+
+  //   storageRef
+  //     .child(name)
+  //     .delete()
+  //     .subscribe({
+  //       next: () => console.log(`Storage deleted: ${name}`),
+  //       error: (err) => console.error('Delete failed:', err),
+  //     });
+  // }
+
+  public deleteFromDbOnly(key: string) {
+    this.db
+      .object(`uploads/${key}`)
+      .remove()
+      .then(() => console.log('DB entry deleted:', key))
+      .catch((err) => console.error(err));
+  }
+
+  public deleteFileStorage(name: string) {
+    this.storage
+      .ref(this.basePath)
+      .child(name)
+      .delete()
+      .subscribe({
+        next: () => console.log('deleted'),
+        error: (e) => console.error(e),
+      });
   }
 }
