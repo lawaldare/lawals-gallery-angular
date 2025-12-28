@@ -32,15 +32,18 @@ export class GalleryComponent {
         }
       );
 
-    setInterval(this.change.bind(this), this.numberOfSeconds);
+    // setInterval(this.change.bind(this), this.numberOfSeconds);
+    setInterval(this.change, this.numberOfSeconds);
   }
 
   change() {
     let div = document.querySelector('section');
-    let num = Math.floor(Math.random() * this.files.length) + 1;
-
+    let num = Math.floor(Math.random() * 115) + 117;
     if (div) {
-      div.innerHTML = `<img src='${this.files[num].url}'>`;
+      //Firebase quota usuage exceeded workaround and it is not free anymore
+      //So using local images instead of fetching from firebase storage
+      // div.innerHTML = `<img src='${this.files[num].url}'>`;
+      div.innerHTML = `<img src='assets/images/${num}.jpg'>`;
     }
   }
 }
