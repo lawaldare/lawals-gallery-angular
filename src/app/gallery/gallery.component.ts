@@ -28,7 +28,6 @@ export class GalleryComponent {
       .subscribe(
         (filesFromDB: { key: string; name: string; url: string }[]) => {
           this.files = filesFromDB;
-          console.log(this.files);
         }
       );
 
@@ -40,7 +39,7 @@ export class GalleryComponent {
     let div = document.querySelector('section');
     let num = Math.floor(Math.random() * 115) + 117;
     if (div) {
-      //Firebase quota usuage exceeded workaround and it is not free anymore
+      //Firebase quota usually exceeded and it is not free anymore
       //So using local images instead of fetching from firebase storage
       // div.innerHTML = `<img src='${this.files[num].url}'>`;
       div.innerHTML = `<img src='assets/images/${num}.jpg'>`;
