@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-image',
@@ -9,7 +10,7 @@ import { UploadService } from '../upload.service';
 export class UploadImageComponent {
   selectedFiles?: FileList;
 
-  constructor(private uploadService: UploadService) {}
+  constructor(private uploadService: UploadService, private router: Router) {}
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
@@ -27,6 +28,8 @@ export class UploadImageComponent {
         }
       });
       this.selectedFiles = undefined;
+      alert('File(s) uploaded successfully');
+      this.router.navigate(['/gallery']);
     }
   }
 }

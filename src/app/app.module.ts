@@ -10,9 +10,10 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
-  declarations: [AppComponent, UploadImageComponent],
+  declarations: [AppComponent, UploadImageComponent, GalleryComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
